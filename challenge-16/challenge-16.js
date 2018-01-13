@@ -1,5 +1,5 @@
-//(function() {
-
+(function() {
+	'use strict';
 
 	/*
 	1. Envolva todo o conteúdo desse desafio em uma IIFE.
@@ -36,21 +36,14 @@
 	console.log para cada formato.
 	*/
 	console.log( '\nNome convertido à partir de um slug:' );
-	var fullName = 'valdir-pereira';	
+	var fullName = 'valdir-pereira-da-silva';	
 
-	//var newName = fullName.charAt(0).toUpperCase() + fullName.slice(1);
+	var newName = fullName.split('-').map(function(name){
+		return name.charAt(0).toUpperCase() + name.slice(1);
+	}).join(' ');
 
-	var firstName = fullName.charAt(0).toUpperCase() + fullName.slice(1, fullName.indexOf('-'))
-
-	var indexLastName = fullName.indexOf('-')+1;
-
-	var lastName = fullName.charAt(indexLastName).toUpperCase() + fullName.slice(indexLastName+1);
-
-	var newName = firstName + ' ' + lastName;
-
-	var newfullName = newName.replace('-', ' ');
-
-	console.log(newfullName);
+	console.log(fullName);
+	console.log(newName);
 
 	/*
 	- Crie um array com 5 nomes. Reduza esses nomes a uma única string, separando
@@ -62,32 +55,38 @@
 	5 nomes foi somente uma sugestão ;)
 	*/
 	console.log( '\nMeus amigos:' );
-	var arr = ['Valdir', 'Daniel', "Jao", 'Eva', 'Jane', 'Tevez', 'Edrian'];
-	var newArr = arr.join(', ');
+	var arr = ['Valdir', 'Daniel', "Jao", 'Eva', 'Raoni', 'Tevez', 'Edrian'];
+	
+	//Método 2
+	var phrase = arr.reduce(function(acumulado, atual, index) {
+		var separator = arr.length - 1 === index ? ' e ' : ', ';
+		return acumulado + separator + atual;
+	}).concat(' são meus amigos');
+	
+	console.log(phrase);
 
-	var firstPart = newArr.slice(0, newArr.lastIndexOf(','));
-
-	var lastPart = newArr.slice(newArr.lastIndexOf(',')).replace(',', ' e');
-
-	var result = firstPart + lastPart + ' são meus amigos.';
-
-	console.log(result);
+	// Método 1
+	// var newArr = arr.join(', ');
+	// var firstPart = newArr.slice(0, newArr.lastIndexOf(','));
+	// var lastPart = newArr.slice(newArr.lastIndexOf(',')).replace(',', ' e');
+	// var result = firstPart + lastPart + ' são meus amigos.';
+	// console.log(result);
 
 	/*
 	Usando o replace(), faça a string "Roberto" virar "Roberta".
 	Mostre o resultado no console.
 	*/
 	console.log( '\nEra "Roberto", agora é:' );
-	test = 'Roberto';
-	var resultName =  test.slice(0 , test.lastIndexOf('o')) + test.slice(test.lastIndexOf('o')).replace('o', 'a')
-	console.log(resultName);
+	var name = 'Roberto';
+	//var resultName =  name.slice(0 , name.lastIndexOf('o')) + name.slice(name.lastIndexOf('o')).replace('o', 'a');
+	console.log(name.replace('to', 'ta'));
 	/*
 	Mostre no console a parte "nando" da string "Fernando". Use o método que
 	faz a busca do final para o início da string.
 	*/
 	console.log( '\nParte de uma string:' );
 	var nome = 'Fernando';
-	console.log(nome.substring(3));
+	console.log(nome.substring(8, 3));
 
 
 	/*
@@ -100,20 +99,21 @@
 	Ex.: Nomes que deveriam funcionar: "Fernando", "RoBertO", "gabriEla", etc.
 	*/
 	console.log( '\nNome com letras intercaladas entre caixa alta e baixa:' );
-	var myName = 'Valdir';
+	var myName = 'gabriEla';
 
 	var mix = [];
 
 	for(var i=0; i < myName.length; i++) {
-		if(myName.indexOf(myName.charAt(i)) % 2 == 0) {
-			var capitalLetter = myName.charAt(i).toUpperCase();
-			mix.push(capitalLetter);
-		} else {
-			var lowercase = myName.charAt(i).toLowerCase();
-			mix.push(lowercase);			
-		}
+		// if(myName.indexOf(myName.charAt(i)) % 2 == 0) {
+		// 	var capitalLetter = myName.charAt(i).toUpperCase();
+		// 	mix.push(capitalLetter);
+		// } else {
+		// 	var lowercase = myName.charAt(i).toLowerCase();
+		// 	mix.push(lowercase);			
+		// }
+		mix.push( i % 2 === 0 ? myName[i].toLocaleUpperCase() : myName[i].toLocaleLowerCase() );
 	}
 
 	console.log(mix.join(''));
 
-//})()
+})()
